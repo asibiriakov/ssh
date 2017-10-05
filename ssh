@@ -1,0 +1,9 @@
+import paramiko
+ssh = paramiko.SSHClient()
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+ssh.connect('10.10.10.10', port=22, username='admin', password='admin')
+stdin, stdout, stderr = ssh.exec_command('diff')
+output = stdout.readlines()
+output = map(lambda s: s.strip(), output)
+for new in output:
+        print(new)
